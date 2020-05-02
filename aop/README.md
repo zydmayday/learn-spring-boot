@@ -87,10 +87,18 @@ execution(* com.zyd.model.*.get*())
 - 方法名的通配符
 - 方法参数的通配符
 
+使用通配符的目的是让我们可以一次性匹配多个方法，因为通常我们希望切入的方法不止一个。
+
 ### 5.2 Pointcut.
 
 通过创建Pointcut我们可以抽象出一些切入点，并且其他需要做AOP的方法就不需要自己定义何时执行，  
 而是直接调用引用定义好的Pointcut就行。
+
+> 很明显，如果我们给每个Aspect方法都创建一个单独的匹配（execution之类的），
+> 那么一旦我们修改了业务逻辑中的类或者方法名，
+> 我们想要再修改Aspect中的配置的话会非常的繁琐，
+> 如果我们把这些匹配都抽象成Pointcut的话管理起来会非常的方便。
+
 
 ## Video 6
 
@@ -105,9 +113,71 @@ allGetters() && allCircleMethods()
 ```
 通过组合用更少的Pointcut设计出更多的pattern。
 
+> 随着我们的业务逻辑越来越复杂，我们可能会创建出非常复杂的Pointcut，
+> 对于阅读代码的人来说很不友好，对于维护者来说也很难下手。
+> 如果我们可以将复杂的Pointcut拆分成多个简单的Pointcut，并且通过排列组合来复用这些逻辑，
+> 很显然是一个非常好的选择。
+
 ## Video 7
 
 JoinPoints。  
 一般用在方法上。可以获取到执行方法的一些信息。
 - toString：执行了什么方法
-- getTarget：
+- so on
+
+@Before("args(some-args)")  
+我们也可以在设置Pointcut的时候指定目标函数的执行参数，  
+这样我们可以在Aspect里面获取到函数执行的参数值进行一些处理。
+
+> 有时候我们不光是希望切入到某个方法中，在他的之前或者之后做一些事情，
+> 我们同时也希望获取到目标方法的一些信息，这样能更灵活的执行我们的Aspect逻辑。
+> 比如日志记录切入方法的执行参数值，返回类型等等。
+> 那么JoinPoints就给我们提供了这样一个接口来实现这些功能。
+
+## Video 8
+
+- @After
+- @AfterReturning
+- @AfterThrowing
+
+After稍微特殊一点，因为函数执行可能会抛出异常，
+所以我们可以设置一些pointcut，他们的执行条件为要么函数正常返回，要么抛出异常。
+
+@AfterReturning(pointcut='point-cut', returning='returnVal')  
+通过这样的方式我们可以获取到切入方法的返回值来进行处理。
+比如在某些场景中，我们希望日志记录某些特定方法的返回值，来进行异常排查等等。
+
+同理，  
+@AfterThrowing(pointcut='point-cut', throwing='ex')  
+我们也可以在Aspect中获取到目标函数抛出的异常。
+
+## Video 9
+
+Around.
+
+可以包裹目标函数，甚至决定是否执行目标函数。
+一般可以用来做filter。
+
+但是通常来说，我们要尽可能遵循最小原则，
+如果你知道你的Aspect只需要在目标函数之后执行，那么用@Before就足够了。
+
+## Video 10
+
+Naming Conversion非常的重要。  
+因为我们在描述匹配的时候我们是用的字符串匹配，
+所以如果一个项目的组员不遵守一定的命名规则的话，
+那么很容易会匹配不上某些类或者匹配到一些不想匹配的类。
+
+使用Annotation来反向配置Aspect。
+- 编写Aspect方法
+- 编写自定义的annotation
+- 配置Aspect方法，绑定方法到某个annotation上
+- 在我们想要应用此Aspect方法的业务类方法上使用这个annotation
+
+这样，业务类中的方法就和特定的Aspect方法绑定上了。（通过annotation）
+
+> 为什么要这么做？
+> 因为有时候我们想要给某些特定的方法绑定Aspect，
+> 但是这些特定的方法很难找到规律，（意味着我们很难写出通用的Pointcut），
+> 这时候通过annotation来绑定会显得更加灵活。  
+> 但同时也增加了业务类的负担，因为他们要维护Aspect的配置。

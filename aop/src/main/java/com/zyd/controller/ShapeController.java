@@ -26,6 +26,12 @@ public class ShapeController {
         return circle;
     }
 
+    @RequestMapping("/circle/with-return/{name}")
+    public Circle getCircleAndReturn(@PathVariable String name) {
+        circle.setNameAndReturn(name);
+        return circle;
+    }
+
     @RequestMapping("/triangle/{name}")
     public String getTriangle(@PathVariable String name) {
         triangle.setName(name);

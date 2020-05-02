@@ -1,8 +1,8 @@
 package com.zyd.aspect;
 
-import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
@@ -45,24 +45,60 @@ public class LoggingAspect {
 //        System.out.println("Second Advice executed.");
 //    }
 
-    @Before("allCircleMethods()")
-    public void LoggingAspect(JoinPoint joinPoint) {
-        System.out.println(joinPoint.toString());
-    }
+//    @Before("allCircleMethods()")
+//    public void LoggingAspect(JoinPoint joinPoint) {
+////        System.out.println(joinPoint.toString());
+//    }
+//
+//    //    @After("allMethodsInModelWithNameArgs(name)")
+//    @AfterReturning(pointcut = "allMethodsInModelWithNameArgs(name)", returning = "returnString")
+//    public void stringArgsMethods(String name, String returnString) {
+//        System.out.println("A method that takes String args called, name is: " + name);
+//    }
+//
+//    @AfterThrowing(pointcut = "allMethodsInModelWithNameArgs(name)", throwing = "ex")
+//    public void exceptionAdvice(String name, Exception ex) {
+//        System.out.println("An exception has been thrown");
+//    }
 
-    @Before("allMethodsInModelWithNameArgs(name)")
-    public void stringArgsMethods(String name) {
-        System.out.println("A method that takes String args called");
-        System.out.println(name);
+//    @Around("allMethodsInModel()")
+//    public Object myAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
+//        Object ret = null;
+//        try {
+//            System.out.println("Before advice");
+//            ret = proceedingJoinPoint.proceed();
+//            System.out.println("After returning");
+//        } catch (Throwable throwable) {
+//            System.out.println("After Throwing");
+//        }
+//        System.out.println("After finally");
+//        return ret;
+//    }
+
+    @Around("@annotation(com.zyd.aspect.Loggable)")
+    public Object myAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
+        Object ret = null;
+        try {
+            System.out.println("Before advice");
+            ret = proceedingJoinPoint.proceed();
+            System.out.println("After returning");
+        } catch (Throwable throwable) {
+            System.out.println("After Throwing");
+        }
+        System.out.println("After finally");
+        return ret;
     }
 
     @Pointcut("execution(* com.zyd.model.*.*(..))")
-    public void allMethodsInModel() {}
+    public void allMethodsInModel() {
+    }
 
     @Pointcut("within(com.zyd.model.Circle)")
-    public void allCircleMethods() {}
+    public void allCircleMethods() {
+    }
 
     @Pointcut("allMethodsInModel() && args(name)")
-    public void allMethodsInModelWithNameArgs(String name) {}
+    public void allMethodsInModelWithNameArgs(String name) {
+    }
 
 }
