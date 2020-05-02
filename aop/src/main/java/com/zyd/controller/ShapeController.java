@@ -1,7 +1,7 @@
 package com.zyd.controller;
 
-import com.zyd.aspect.LoggingAspect;
 import com.zyd.model.Circle;
+import com.zyd.model.Triangle;
 import com.zyd.service.ShapeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +17,18 @@ public class ShapeController {
     @Autowired
     Circle circle;
 
+    @Autowired
+    Triangle triangle;
+
     @RequestMapping("/circle/{name}")
     public Circle getCircle(@PathVariable String name) {
         circle.setName(name);
         return circle;
+    }
+
+    @RequestMapping("/triangle/{name}")
+    public String getTriangle(@PathVariable String name) {
+        triangle.setName(name);
+        return triangle.getName();
     }
 }

@@ -69,3 +69,45 @@ That's it!
 启动应用，然后在网址中输入localhost:8080/circle/xxx。
 如果可以看到console口输出了Aspect中的内容（Advice run. Get Method called），那么你就成功了。
 
+## Video 5
+
+### 5.1 WildCard.
+
+execution(* get*())好像在我的这个版本的Spring中不管用，一直报错。
+> 找到了原因是因为这里的get设置太广泛，导致一些内置的tomcat的一些类也被aop了，  
+> 由于一些方法无法访问到所以一直报错无法启动
+
+```
+execution(* com.zyd.model.*.get*())
+```
+
+一些通配符的使用方法，
+- 返回类型
+- 限制package
+- 方法名的通配符
+- 方法参数的通配符
+
+### 5.2 Pointcut.
+
+通过创建Pointcut我们可以抽象出一些切入点，并且其他需要做AOP的方法就不需要自己定义何时执行，  
+而是直接调用引用定义好的Pointcut就行。
+
+## Video 6
+
+一些关于Pointcut的配置。
+
+- execution：作用于方法
+- within：作用于类
+
+Pointcut的组合。  
+```
+allGetters() && allCircleMethods()  
+```
+通过组合用更少的Pointcut设计出更多的pattern。
+
+## Video 7
+
+JoinPoints。  
+一般用在方法上。可以获取到执行方法的一些信息。
+- toString：执行了什么方法
+- getTarget：
