@@ -1,4 +1,4 @@
-package io.zyd.learnspringboot.topic;
+package com.zyd.topic;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

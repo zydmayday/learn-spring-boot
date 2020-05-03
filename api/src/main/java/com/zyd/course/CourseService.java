@@ -1,4 +1,4 @@
-package io.zyd.learnspringboot.course;
+package com.zyd.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package io.zyd.learnspringboot;
+package com.zyd;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

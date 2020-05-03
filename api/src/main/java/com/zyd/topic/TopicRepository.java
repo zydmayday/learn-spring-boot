@@ -1,4 +1,4 @@
-package io.zyd.learnspringboot.topic;
+package com.zyd.topic;
 
 import org.springframework.data.repository.CrudRepository;
 

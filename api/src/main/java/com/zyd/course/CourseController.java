@@ -1,6 +1,6 @@
-package io.zyd.learnspringboot.course;
+package com.zyd.course;
 
-import io.zyd.learnspringboot.topic.Topic;
+import com.zyd.topic.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
