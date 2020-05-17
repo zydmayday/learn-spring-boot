@@ -3,11 +3,15 @@ package com.zyd.models;
 public class Movie {
 
     private String movieId;
-    private String name;
+    private String title;
 
-    public Movie(String movieId, String name) {
+    public Movie() {
+
+    }
+
+    public Movie(String movieId, String title) {
         this.movieId = movieId;
-        this.name = name;
+        this.title = title;
     }
 
     public String getMovieId() {
@@ -18,11 +22,11 @@ public class Movie {
         this.movieId = movieId;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
