@@ -1,0 +1,9 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "zyd-lambda-app"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-13zbx72nyjwcb"
+s3_prefix = "zyd-lambda-app"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_IAM"

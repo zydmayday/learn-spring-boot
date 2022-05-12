@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An AWS Lambda application that calls the Lambda API.
+
+Globals:
+  Api:
+    # API Gateway regional endpoints
+    EndpointConfiguration: REGIONAL
+
+Resources:
+  function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.zydmayday.aws.lambda.StreamLambdaHandler::handleRequest
+      Runtime: java8
+      CodeUri: .
+      MemorySize: 1512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 60
+      Events:
+        HttpApiEvent:
+          Type: HttpApi
+          properties:
+            TimeoutInMillis: 20000
+            PayloadFormatVersion: '1.0'
+
+Outputs:
+  SpringBootPingApi:
+    Description: A little ping app with aws lambda
+    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/api'
+    Export:
+      Name: SpringBootPingApi
