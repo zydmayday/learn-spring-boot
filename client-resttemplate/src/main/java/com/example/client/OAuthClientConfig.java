@@ -14,14 +14,14 @@ public class OAuthClientConfig {
     // Create the Okta client registration
     @Bean
     ClientRegistration keycloakClientRegistration(
-            @Value("${spring.security.oauth2.client.provider.keycloak.token-uri}") String token_uri,
-            @Value("${spring.security.oauth2.client.registration.keycloak.client-id}") String client_id,
-            @Value("${spring.security.oauth2.client.registration.keycloak.client-secret}") String client_secret,
-            @Value("${spring.security.oauth2.client.registration.keycloak.scope}") String scope,
-            @Value("${spring.security.oauth2.client.registration.keycloak.authorization-grant-type}") String authorizationGrantType
+            @Value("${spring.security.oauth2.client.provider.maam.token-uri}") String token_uri,
+            @Value("${spring.security.oauth2.client.registration.maam.client-id}") String client_id,
+            @Value("${spring.security.oauth2.client.registration.maam.client-secret}") String client_secret,
+            @Value("${spring.security.oauth2.client.registration.maam.scope}") String scope,
+            @Value("${spring.security.oauth2.client.registration.maam.authorization-grant-type}") String authorizationGrantType
                                              ) {
         return ClientRegistration
-                .withRegistrationId("keycloak")
+                .withRegistrationId("maam")
                 .tokenUri(token_uri)
                 .clientId(client_id)
                 .clientSecret(client_secret)

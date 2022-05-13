@@ -36,7 +36,7 @@ public class DemoApplication implements CommandLineRunner {
         ////////////////////////////////////////////////////
 
         // Build an OAuth2 request for the Okta provider
-        OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest.withClientRegistrationId("keycloak")
+        OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest.withClientRegistrationId("maam")
                                                                         .principal("Demo Service")
                                                                         .build();
 
