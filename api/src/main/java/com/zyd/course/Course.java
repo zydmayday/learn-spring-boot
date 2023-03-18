@@ -1,10 +1,12 @@
 package com.zyd.course;
 
 import com.zyd.topic.Topic;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
+@Entity
 public class Course {
 
     @Id

@@ -19,8 +19,8 @@ public class TopicService {
         return topicRepository.findById(id).orElse(new Topic());
     }
 
-    public void addTopic(Topic topic) {
-        topicRepository.save(topic);
+    public Topic addTopic(Topic topic) {
+        return topicRepository.save(topic);
     }
 
     public void updateTopic(String id, Topic topic) {
