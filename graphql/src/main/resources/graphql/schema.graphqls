@@ -1,0 +1,17 @@
+type Query {
+    organizationByOrgCode(orgCode: String): Organization
+}
+
+type Employee {
+    id: ID,
+    empNo: String
+    level5Org: Organization
+    level6Org: Organization
+    level7Org: Organization
+}
+
+type Organization {
+    id: ID,
+    orgCode: String
+    orgName: String
+}

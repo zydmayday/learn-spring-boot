@@ -1,0 +1,1 @@
+insert into Organization (org_code, org_name) values ('org1', 'org1'),('org2', 'org2'),('org3', 'org3')
