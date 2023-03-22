@@ -1,13 +1,21 @@
 type Query {
     organizationByOrgCode(orgCode: String): Organization
-    employeeByEmpNo(empNo: String): Employee
+    employeeByEmpNo(empNo: String): [Employee]
 }
 
 type Employee {
     empNo: String
+    ymd: String
     level5Org: Organization
     level6Org: Organization
     level7Org: Organization
+    salaries: [Salary]
+}
+
+type Salary {
+    empNo: String
+    ymd: String
+    salary: Int
 }
 
 type Organization {
