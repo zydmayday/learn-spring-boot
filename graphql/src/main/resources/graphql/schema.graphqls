@@ -1,6 +1,16 @@
 type Query {
     organizationByOrgCode(orgCode: String): Organization
     employeeByEmpNo(empNo: String): [Employee]
+    getBookById(id: ID): Book
+    getBookList: [Book]
+}
+
+type Mutation {
+    addBook(book: AddBookInput):Book
+}
+
+type Subscription {
+    bookAdded: Book
 }
 
 type Employee {
@@ -21,4 +31,14 @@ type Salary {
 type Organization {
     orgCode: String
     orgName: String
+}
+
+type Book {
+    id: ID
+    name: String
+}
+
+input AddBookInput {
+    id: ID
+    name: String
 }
